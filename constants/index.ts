@@ -5,6 +5,7 @@ export const subjects = [
   "history",
   "coding",
   "economics",
+  "commerce",
 ];
 
 export const subjectsColors = {
@@ -14,6 +15,7 @@ export const subjectsColors = {
   coding: "#FFC8E4",
   history: "#FFECC8",
   economics: "#C8FFDF",
+  commerce: "#ADFF2F",
 };
 
 export const voices = {
@@ -69,5 +71,13 @@ export const recentSessions = [
     topic: "The Basics of Supply & Demand",
     duration: 10,
     color: "#C8FFDF",
+  },
+  {
+    id: "7",
+    subject: "commerce",
+    name: "The Commerce Maestro",
+    topic: "The Basics of Supply & Demand",
+    duration: 10,
+    color: "#ADFF2F",
   },
 ];
