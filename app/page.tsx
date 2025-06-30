@@ -11,6 +11,11 @@ import {
 } from "@/lib/actions/companion.action";
 import { getSubjectColor } from "@/lib/utils";
 import Hero from "@/components/hero";
+import AboutUs from "./my-journey/about-us/page";
+import Footer from "@/components/Footer";
+
+// 🛠️ Tell Next.js this is a dynamic (server-rendered) page
+export const dynamic = "force-dynamic";
 
 const Page = async () => {
   const companions = await getAllCompanions({ limit: 3 });
@@ -38,6 +43,7 @@ const Page = async () => {
         />
         <CTA />
       </section>
+      <Footer />
     </main>
   );
 };

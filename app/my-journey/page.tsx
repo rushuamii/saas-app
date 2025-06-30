@@ -10,10 +10,8 @@ import {
   getUserSessions,
 } from "@/lib/actions/companion.action";
 import { currentUser } from "@clerk/nextjs/server";
-import { url } from "inspector";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { ur } from "zod/v4/locales";
 
 const Profile = async () => {
   const user = await currentUser();
@@ -29,12 +27,16 @@ const Profile = async () => {
         <div className="flex gap-4 items-center">
           <Image
             src={user.imageUrl}
-            alt={user.firstName!}
+            alt={
+              user.firstName
+                ? `${user.firstName}'s profile picture`
+                : "User profile picture"
+            }
             width={110}
             height={110}
           />
 
-          <div className=" flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <h1 className="font-bold text-2xl">
               {user.firstName} {user.lastName}
             </h1>
@@ -43,12 +45,13 @@ const Profile = async () => {
             </p>
           </div>
         </div>
+
         <div className="flex gap-4">
           <div className="border border-block rounded-lg p-3 gap-2 flex flex-col h-fit">
             <div className="flex gap-2 items-center">
               <Image
                 src="/icons/check.svg"
-                alt="checkmark"
+                alt="Completed lessons icon"
                 width={22}
                 height={22}
               />
@@ -56,11 +59,12 @@ const Profile = async () => {
             </div>
             <div>Lessons completed</div>
           </div>
+
           <div className="border border-block rounded-lg p-3 gap-2 flex flex-col h-fit">
             <div className="flex gap-2 items-center">
               <Image
                 src="/icons/cap.svg"
-                alt="checkmark"
+                alt="Companions created icon"
                 width={22}
                 height={22}
               />
@@ -83,6 +87,7 @@ const Profile = async () => {
             />
           </AccordionContent>
         </AccordionItem>
+
         <AccordionItem value="companions">
           <AccordionTrigger className="text-2xl font-bold">
             My Companions {`(${companions.length})`}

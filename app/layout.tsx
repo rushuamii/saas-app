@@ -10,8 +10,11 @@ const bricolage = Bricolage_Grotesque({
 });
 
 export const metadata: Metadata = {
-  title: "Converso",
+  title: "Dixi",
   description: "Real-time AI Teaching Platform",
+  icons: {
+    icon: "/logo-2.png",
+  },
 };
 
 export default function RootLayout({

@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="navbar flex justify-between items-center px-6 py-4">
       <Link href="/">
         <div className="flex items-center gap-2.5 cursor-pointer">
-          <Image src="/images/logo.svg" alt="logo" width={46} height={44} />
+          <Image src="/images/logo-3.png" alt="logo" width={70} height={70} />
         </div>
       </Link>
       <div className="flex items-center gap-8">
