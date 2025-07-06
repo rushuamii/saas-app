@@ -1,126 +1,206 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Link from "next/link";
+import { motion, useAnimation } from "framer-motion";
+import Lottie from "lottie-react";
+import particles from "@/constants/particles.json"; // Ensure this file exists
+import Footer from "@/components/Footer";
 
 const AboutUs = () => {
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const controls = useAnimation();
+
+  useEffect(() => {
+    controls.start({ opacity: 1, y: 0 });
+  }, [controls]);
+
   return (
     <>
       <Head>
-        <title>About Us | Converso - Sri Lanka's AI-Powered LMS</title>
+        <title>About Us | Dixi - AI Tutor Sri Lanka for O/L Students</title>
         <meta
           name="description"
-          content="Converso is Sri Lanka’s most innovative AI-powered LMS platform for English-speaking learners. Currently available only in English, our mission is to make smart education accessible for O/L and A/L students across Sri Lanka."
+          content="Discover Dixi, Sri Lanka's leading AI-powered LMS for O/L and A/L students. Learn about our AI tutor, voice-assisted learning, and innovative education platform."
         />
         <meta
           name="keywords"
-          content="LMS Sri Lanka, AI education Sri Lanka, O/L A/L online learning, English LMS Sri Lanka, AI tutor Sri Lanka, education SaaS Sri Lanka"
+          content="AI tutor Sri Lanka, LMS for O/L students, AI-powered education platform, online learning Sri Lanka, Dixi about us"
         />
       </Head>
 
-      <section className="bg-white text-gray-800 px-6 md:px-12 lg:px-24 py-20">
-        <div className="max-w-6xl mx-auto">
-          {/* Language Disclaimer */}
-          <div className="bg-yellow-100 text-yellow-800 font-medium px-4 py-3 rounded mb-10 text-center">
-            🎙️ Dixi is currently available in <strong>English only</strong>.
-            Sinhala & Tamil versions are under development.
-          </div>
+      <section className="bg-gradient-to-b from-blue-50 via-white to-blue-50 text-gray-800 px-2 sm:px-4 md:px-6 lg:px-12 xl:px-24 py-8 sm:py-10 md:py-12 lg:py-16 min-h-screen relative overflow-hidden">
+        {/* Background Animation */}
+        <div className="absolute inset-0 opacity-20">
+          <Lottie animationData={particles} loop={true} autoplay={true} />
+        </div>
 
-          {/* Hero Header */}
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center text-gray-900">
-            About Dixi – Sri Lanka’s Smartest AI-Powered Learning Platform
-          </h1>
-          <p className="text-lg text-gray-600 text-center mb-12">
-            Dixi is Sri Lanka’s first AI-powered LMS designed exclusively for
-            English-speaking students and educators. We offer personalized,
-            voice-assisted learning aligned with the national O/L syllabus, all
-            through an intelligent, easy-to-use platform.
-          </p>
+        {/* Banner Image */}
+        <div className="max-w-7xl mx-auto relative z-10 mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+          <motion.img
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.8 }}
+            src="/images/banner.png" // Replace with actual image path
+            alt="AI-powered learning with Dixi in Sri Lanka"
+            className="w-full min-h-[40vh] sm:min-h-[50vh] md:min-h-[60vh] lg:min-h-[70vh] object-cover rounded-lg shadow-md"
+          />
+        </div>
 
-          {/* Mission */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-semibold mb-4">🎯 Our Mission</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Our mission is to modernize education across Sri Lanka by
-              combining artificial intelligence with curriculum-aligned, digital
-              learning. We empower every Englishspeaking student whether in
-              Colombo, Kandy, or Galle with access to an AI tutor, smart
-              revision tools, and voice-based learning assistance.
-            </p>
-          </div>
-
-          {/* Unique Features */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-semibold mb-4">💡 Why Converso?</h2>
-            <ul className="list-disc list-inside text-gray-700 space-y-3">
-              <li>
-                🇱🇰 Built for Sri Lanka’s{" "}
-                <strong> Grade 1 to O/L students</strong>
-              </li>
-              <li>
-                🧠 Powered by <strong>AI tutors & voice companions</strong>
-              </li>
-              <li>
-                🎙️ <strong>Available only in English</strong> (Sinhala & Tamil
-                coming soon)
-              </li>
-              <li>📱 Mobile-first platform — accessible on any device</li>
-              <li>
-                🔒 Secure subscriptions, dashboards, and progress tracking
-              </li>
-            </ul>
-          </div>
-
-          {/* Team */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-semibold mb-4">👨‍💻 Our Team</h2>
-            <p className="text-gray-700">
-              Converso is built by{" "}
-              <Link href="https://portfolio-web-umair.netlify.app/">
-                {" "}
-                Web Div
-              </Link>{" "}
-              who believed in future ready learning. We're committed to making
-              advanced, AI-powered education accessible to every corner of the
-              island.
-            </p>
-          </div>
-
-          {/* Roadmap */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-semibold mb-4">
-              🚀 Our Journey & Roadmap
-            </h2>
-            <ul className="list-disc list-inside text-gray-700 space-y-2">
-              <li>
-                ✅ 2025 Q2: Beta launch with English AI lessons & voice bot
-              </li>
-              <li>📚 2025 Q3: Full O/L lesson library release</li>
-              <li>
-                🎓 2025 Q4: AI-powered exam prep and smart practice sessions
-              </li>
-              <li>
-                🌏 2026: Sinhala & Tamil versions + expand across South Asia
-              </li>
-            </ul>
-          </div>
-
-          {/* CTA */}
-          <div className="text-center">
-            <h3 className="text-2xl font-semibold mb-4">
-              Ready to Experience the Future of Learning in Sri Lanka?
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Join thousands of students across Sri Lanka who are learning
-              smarter with Converso's AI-powered platform.
-            </p>
-            <a
-              href="/sign-in"
-              className="inline-block bg-black text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition"
+        {/* Video Promotion */}
+        <div className="max-w-7xl mx-auto relative z-10 mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 mb-4"
+          >
+            Watch How Dixi Transforms Education
+          </motion.h2>
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-2xl mx-auto">
+            <video
+              controls
+              poster="/video/about-poster.jpg" // Replace with first frame image of about.mp4
+              className="w-full h-40 sm:h-48 md:h-56 lg:h-64 rounded-lg shadow-md bg-gray-200"
+              onPlay={() => setIsVideoPlaying(true)}
+              onPause={() => setIsVideoPlaying(false)}
             >
-              Get Started Today
-            </a>
+              <source src="/video/about.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
+        {/* About Us Content */}
+        <div className="max-w-7xl mx-auto relative z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.8 }}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 text-center text-gray-900"
+          >
+            About Dixi - Sri Lanka’s AI-Powered Learning Platform
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 text-center mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto"
+          >
+            Dixi is Sri Lanka’s pioneering AI-powered LMS, designed to empower
+            O/L and A/L students with innovative online learning. Our mission is
+            to make smart education accessible through advanced AI tutoring and
+            voice-assisted tools.
+          </motion.p>
+
+          {/* Mission */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-6 sm:mb-8 md:mb-10 lg:mb-12"
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-gray-900 text-center sm:text-left">
+              🎯 Our Mission
+            </h2>
+            <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto text-center sm:text-left text-sm sm:text-base md:text-lg">
+              At Dixi, we aim to revolutionize education in Sri Lanka by
+              integrating AI technology with a curriculum-aligned learning
+              experience. We provide English-speaking students with personalized
+              AI tutors, voice companions, and smart analytics to excel in their
+              studies.
+            </p>
+          </motion.div>
+
+          {/* Key Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-6 sm:mb-8 md:mb-10 lg:mb-12"
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-5 md:mb-6 text-gray-900 text-center sm:text-left">
+              💡 Features of Dixi AI Tutor
+            </h2>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 text-gray-700">
+              <motion.li
+                whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                className="flex items-start gap-2 p-3 sm:p-4 rounded-lg transition-all duration-300"
+              >
+                <span className="text-blue-600">🧠</span>
+                <strong>Personalized AI Tutoring</strong> - Adaptive learning
+                paths for every student.
+              </motion.li>
+              <motion.li
+                whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                className="flex items-start gap-2 p-3 sm:p-4 rounded-lg transition-all duration-300"
+              >
+                <span className="text-blue-600">🎙️</span>
+                <strong>Voice-Assisted Learning</strong> - Interactive voice
+                tools for hands-free study.
+              </motion.li>
+              <motion.li
+                whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                className="flex items-start gap-2 p-3 sm:p-4 rounded-lg transition-all duration-300"
+              >
+                <span className="text-blue-600">📊</span>
+                <strong>Smart Analytics</strong> - Track progress with real-time
+                performance insights.
+              </motion.li>
+              <motion.li
+                whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                className="flex items-start gap-2 p-3 sm:p-4 rounded-lg transition-all duration-300"
+              >
+                <span className="text-blue-600">📱</span>
+                <strong>Mobile Accessibility</strong> - Learn anytime, anywhere
+                on any device.
+              </motion.li>
+              <motion.li
+                whileHover={{ scale: 1.05, backgroundColor: "#f3f4f6" }}
+                className="flex items-start gap-2 p-3 sm:p-4 rounded-lg transition-all duration-300"
+              >
+                <span className="text-blue-600">🌐</span>
+                <strong>SEO-Optimized Content</strong> - Enhance visibility with
+                AI-generated resources.
+              </motion.li>
+            </ul>
+          </motion.div>
+
+          {/* Team */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mb-6 sm:mb-8 md:mb-10 lg:mb-12"
+          >
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-3 sm:mb-4 md:mb-5 text-gray-900 text-center sm:text-left">
+              👥 Our Team
+            </h2>
+            <p className="text-gray-700 leading-relaxed max-w-3xl mx-auto text-center sm:text-left text-sm sm:text-base md:text-lg">
+              Dixi is built by a dedicated team of AI specialists, educators,
+              and UI/UX designers passionate about transforming education. Led
+              by industry experts, we bring years of experience to create a
+              platform that supports students across Sri Lanka.
+            </p>
+          </motion.div>
+
+          {/* Trust Signals */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={controls}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mb-6 sm:mb-8 md:mb-10 lg:mb-12 text-center"
+          >
+            <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">
+              Trusted by Students Across Sri Lanka
+            </h3>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4">
+              <span className="bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm">
+                All Across Sri Lanka
+              </span>
+            </div>
+          </motion.div>
+        </div>
+        <Footer />
       </section>
     </>
   );

@@ -2,9 +2,12 @@
 
 import { auth } from '@clerk/nextjs/server';
 import { createSupabaseClient } from '../supabase';
-import { CreateCompanion, GetAllCompanions } from '@/types'; // Ensure these types exist
+import { CreateCompanion, GetAllCompanions } from '@/types';
 import { subjects } from '@/constants';
 
+/**
+ * Create a new companion
+ */
 export const createCompanion = async (formData: CreateCompanion) => {
   const { userId: author } = await auth();
   const supabase = createSupabaseClient();
@@ -19,7 +22,15 @@ export const createCompanion = async (formData: CreateCompanion) => {
   return data[0];
 };
 
-export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }: GetAllCompanions) => {
+/**
+ * Get all companions with optional filtering
+ */
+export const getAllCompanions = async ({
+  limit = 10,
+  page = 1,
+  subject,
+  topic,
+}: GetAllCompanions) => {
   const supabase = createSupabaseClient();
   let query = supabase.from('companions').select();
 
@@ -40,6 +51,9 @@ export const getAllCompanions = async ({ limit = 10, page = 1, subject, topic }:
   return companions;
 };
 
+/**
+ * Get a single companion by ID
+ */
 export const getCompanion = async (id: string) => {
   const supabase = createSupabaseClient();
 
@@ -56,6 +70,9 @@ export const getCompanion = async (id: string) => {
   return data[0];
 };
 
+/**
+ * Add session history for the current user
+ */
 export const addToSessionHistory = async (companionId: string) => {
   const { userId } = await auth();
   const supabase = createSupabaseClient();
@@ -72,21 +89,62 @@ export const addToSessionHistory = async (companionId: string) => {
   return data;
 };
 
-// ✅ Limited to 5 sessions
+/**
+ * Get last 5 sessions or dummy data if new user
+ */
 export const getRecentSessions = async () => {
+  const { userId } = await auth();
   const supabase = createSupabaseClient();
+
+  if (!userId) return [];
+
+  // Check if the user has any session history
+  const { count, error: countError } = await supabase
+    .from('session_history')
+    .select('*', { count: 'exact', head: true })
+    .eq('user_id', userId);
+
+  if (countError) throw new Error(countError.message);
+
+  if (!count || count === 0) {
+    // Return dummy data for new users
+    return [
+      {
+        id: 'demo-1',
+        name: 'Intro AI Tutor',
+        subject: 'General',
+        topic: 'Getting Started',
+        description: 'Learn how Dixi can guide your learning journey.',
+        avatar: '/icons/ai.svg',
+        isDummy: true,
+      },
+      {
+        id: 'demo-2',
+        name: 'Math Master',
+        subject: 'Math',
+        topic: 'Algebra Basics',
+        description: 'Crack Algebra with Dixi’s AI tutor.',
+        avatar: '/icons/math.svg',
+        isDummy: true,
+      },
+    ];
+  }
 
   const { data, error } = await supabase
     .from('session_history')
     .select(`companions:companion_id (*)`)
+    .eq('user_id', userId)
     .order('created_at', { ascending: false })
-    .limit(5); // LIMITED HERE
+    .limit(5);
 
   if (error) throw new Error(error.message);
 
   return data.map(({ companions }) => companions);
 };
 
+/**
+ * Get sessions for a specific user
+ */
 export const getUserSessions = async (userId: string, limit = 10) => {
   const supabase = createSupabaseClient();
 
@@ -102,6 +160,9 @@ export const getUserSessions = async (userId: string, limit = 10) => {
   return data.map(({ companions }) => companions);
 };
 
+/**
+ * Get all companions created by a specific user
+ */
 export const getUserCompanions = async (userId: string) => {
   const supabase = createSupabaseClient();
 
@@ -115,6 +176,9 @@ export const getUserCompanions = async (userId: string) => {
   return data;
 };
 
+/**
+ * Check if user is allowed to create a new companion
+ */
 export const newCompanionPermissions = async () => {
   const { userId, has } = await auth();
   const supabase = createSupabaseClient();

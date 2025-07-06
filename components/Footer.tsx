@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         {/* Logo & About */}
         <div>
-          <h2 className="text-xl font-bold text-white mb-3">Converso</h2>
+          <h2 className="text-xl font-bold text-white mb-3">Dixi</h2>
           <p className="text-sm leading-relaxed">
             Sri Lanka’s first AI-powered LMS platform for smart, accessible, and
             modern online learning.
@@ -111,8 +111,8 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-        © {new Date().getFullYear()} Converso LMS · Built in Sri Lanka · All
-        rights reserved.
+        © {new Date().getFullYear()} Dixi LMS · Built in Sri Lanka · All rights
+        reserved.
       </div>
     </footer>
   );

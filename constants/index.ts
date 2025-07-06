@@ -81,3 +81,31 @@ export const recentSessions = [
     color: "#ADFF2F",
   },
 ];
+
+export const dummyCompanions = [
+  {
+    id: "dummy1",
+    name: "AI Physics Tutor",
+    subject: "physics",
+    topic: "Newton's Laws of Motion",
+    title: "Mastering Motion",
+    duration: 10,
+  },
+  {
+    id: "dummy2",
+    name: "Math Wizard",
+    subject: "math",
+    topic: "Algebra Basics",
+    title: "Solving Equations",
+    duration: 12,
+  },
+  {
+    id: "dummy3",
+    name: "Bio Buddy",
+    subject: "biology",
+    topic: "Cell Anatomy",
+    title: "Explore Cell Structures",
+    duration: 8,
+  },
+];
+
